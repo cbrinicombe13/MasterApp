@@ -3,7 +3,8 @@ import { SET_USER } from '../actions/user';
 const initialState = {
     user: {
         username: '',
-        email: ''
+        email: '',
+        books: []
     }
 };
 
@@ -14,7 +15,8 @@ const userReducer = (state = initialState, action) => {
             return {
                 user: {
                     username: details.username,
-                    email: details.email 
+                    email: details.email,
+                    books: details.books 
                 }
             };
         default:

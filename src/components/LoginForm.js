@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
+import { useSelector } from 'react-redux';
 import FadeLoader from 'react-spinners/FadeLoader';
 
 export default function LoginForm(props) {
     const [user, setUser] = useState('');
     const [pwd, setPwd] = useState('');
+    const theme = useSelector(state => state.theme.theme);
 
     return (
         <div className='jumbotron shadow p-3 mb-5 bg-white rounded' style={styles.jumbotron}>
@@ -36,11 +38,11 @@ export default function LoginForm(props) {
             <button
                 type='button'
                 className='btn'
-                style={styles.button}
+                style={{ backgroundColor: theme.primary }}
                 onClick={props.onLogin.bind(this, [user, pwd])}>Login</button>
             <p>{props.error}</p>
             <div style={styles.loader}>
-                <FadeLoader height={20} color='#01B8BE' loading={props.loading}/>
+                <FadeLoader height={20} color={theme.primary} loading={props.loading} />
             </div>
         </div>
     )
@@ -65,9 +67,6 @@ const styles = {
         marginLeft: '20%',
         marginRight: '20%',
         marginTop: '30px'
-    },
-    button: {
-        backgroundColor: '#01B8BE'
     },
     loader: {
         marginLeft: '47%',

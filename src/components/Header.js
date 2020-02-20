@@ -4,7 +4,7 @@ import Book from '../assets/book.jpg'
 
 export default function Header(props) {
     return (
-        <div className='row' style={styles.header}>
+        <header className='row' style={styles.header}>
             <div className='col-md'>
                 <div className='row'>
                     <img src={Book} alt='Book' style={styles.logo} />
@@ -14,16 +14,17 @@ export default function Header(props) {
                 </div>
             </div>
             {props.children}
-        </div>
+        </header>
     )
 }
 
 const styles = {
     header: {
-        backgroundColor: 'rgba(255, 255, 255, 0.7',
+        backgroundColor: 'rgba(255, 255, 255, 0.7)',
         width: '100%',
         position: 'fixed',
-        padding: '10px'
+        padding: '10px',
+        height: '75px'
     },
     titleContainer: {
         textAlign: 'center'

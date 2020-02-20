@@ -1,4 +1,4 @@
-.card-img-overlay {
+.card-img-overlay, .col-3, .col-9 {
     padding: 0;
 }
 

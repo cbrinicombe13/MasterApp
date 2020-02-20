@@ -1,18 +1,18 @@
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios';
 
 import { setUser } from '../store/actions/user';
 
 import LoginForm from '../components/LoginForm'
 import SignUpForm from '../components/SignUpForm'
-import BgImage from '../assets/background-image.jpg'
 import Header from '../components/Header'
 
 export default function LoginScreen(props) {
     const [signUpMode, toggleSignUpMode] = useState(false);
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
+    const theme = useSelector(state => state.theme.theme);
     const dispatch = useDispatch();
 
     const login = async (details) => {
@@ -29,8 +29,9 @@ export default function LoginScreen(props) {
             return;
         } else if (resp.valid) {
             dispatch(setUser({
-              username: resp.user.username,
-              email: resp.user.email
+                username: resp.user.username,
+                email: resp.user.email,
+                books: resp.user.books
             }));
             props.setLoggedIn(true);
         }
@@ -51,8 +52,8 @@ export default function LoginScreen(props) {
             return;
         } else if (resp.created) {
             dispatch(setUser({
-              username: input.username,
-              email: input.email
+                username: input.username,
+                email: input.email
             }));
             props.setLoggedIn(true);
         }
@@ -68,30 +69,17 @@ export default function LoginScreen(props) {
         : <LoginForm error={error} onLogin={login} loading={loading} />;
 
     return (
-        <div className='card'>
-            <img
-                className='card-img'
-                src={BgImage}
-                alt='Background'>
-            </img>
-            <div className='card-img-overlay'>
-                <Header title='Books.com'>
-                    <div className='col-md'>
-                        <button
-                            className='btn'
-                            style={{ ...styles.button, float: 'right' }}
-                            onClick={toggleMode}
-                        >{signUpMode ? 'Login' : 'Sign Up'}</button>
-                    </div>
-                </Header>
-                {Form}
-            </div>
+        <div className='card-img-overlay'>
+            <Header title='Books.com'>
+                <div className='col-md'>
+                    <button
+                        className='btn'
+                        style={{ backgroundColor: theme.primary, float: 'right' }}
+                        onClick={toggleMode}
+                    >{signUpMode ? 'Login' : 'Sign Up'}</button>
+                </div>
+            </Header>
+            {Form}
         </div>
     )
-}
-
-const styles = {
-    button: {
-        backgroundColor: '#01B8BE'
-    }
 }

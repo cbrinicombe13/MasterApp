@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useSelector } from 'react-redux';
 import FadeLoader from 'react-spinners/FadeLoader';
 
 export default function SignUpForm(props) {
@@ -7,6 +8,7 @@ export default function SignUpForm(props) {
         pwd: '',
         email: ''
     });
+    const theme = useSelector(state => state.theme.theme);
 
     const onChange = (e) => {
         setInput({ ...input, [e.target.id]: e.target.value });
@@ -55,11 +57,11 @@ export default function SignUpForm(props) {
             <button
                 type='button'
                 className='btn'
-                style={styles.button}
+                style={{ backgroundColor: theme.primary }}
                 onClick={props.onSignUp.bind(this, input)}>Sign Up</button>
             <p>{props.error}</p>
             <div style={styles.loader}>
-                <FadeLoader height={20} color='#01B8BE' loading={props.loading}/>
+                <FadeLoader height={20} color={theme.primary} loading={props.loading} />
             </div>
         </div>
     )
@@ -84,9 +86,6 @@ const styles = {
         marginLeft: '20%',
         marginRight: '20%',
         marginTop: '30px'
-    },
-    button: {
-        backgroundColor: '#01B8BE'
     },
     loader: {
         marginLeft: '47%',
