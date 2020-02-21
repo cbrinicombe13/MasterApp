@@ -4,7 +4,7 @@ const initialState = {
     user: {
         username: '',
         email: '',
-        books: []
+        labels: []
     }
 };
 
@@ -16,7 +16,7 @@ const userReducer = (state = initialState, action) => {
                 user: {
                     username: details.username,
                     email: details.email,
-                    books: details.books 
+                    labels: details.labels 
                 }
             };
         default:

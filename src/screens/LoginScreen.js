@@ -31,7 +31,7 @@ export default function LoginScreen(props) {
             dispatch(setUser({
                 username: resp.user.username,
                 email: resp.user.email,
-                books: resp.user.books
+                labels: resp.user.labels
             }));
             props.setLoggedIn(true);
         }

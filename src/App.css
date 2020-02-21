@@ -1,7 +1,15 @@
-.card-img-overlay, .col-3, .col-9 {
+.card-img-overlay, .col-3, .col-9, .book {
     padding: 0;
 }
 
 div.container, h1 {
     margin: 0;
+}
+
+.book:hover {
+    background-color: #F5F5F5;
+}
+
+.active {
+    background-color: #F5F5F5;
 }

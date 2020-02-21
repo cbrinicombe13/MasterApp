@@ -1,33 +1,38 @@
 import React from 'react'
 
 export default function SideBar(props) {
+
+    const onClick = (e) => {
+        const bookList = e.target.parentNode.parentNode.children;
+        for(let i = 0; i < bookList.length; i++) {
+            let book = bookList[i].firstChild;
+            if(book.classList.contains('active')) {
+                book.classList.remove('active');
+            }
+        }
+        e.target.classList.add('active');
+    }
+
     return (
         <div>
-            <a data-toggle="collapse" href="#books" role='button' style={styles.bookBar}>Books</a>
-            <div className="collapse" id="books">
-                {props.books.map(book => {
-                    return (
-                        <div className="card card-body" key={book.id}>{book.label}</div>
-                    )
-                })}
+            <div>
+                <h5 className='card-title'>Your Books</h5>
             </div>
-            <a data-toggle="collapse" href="#books2" role='button' style={styles.bookBar}>Books</a>
-            <div className="collapse" id="books2">
-                {props.books.map(book => {
+            <div className='card'>
+                {props.labels.map(book => {
                     return (
-                        <div className="card card-body" key={book.id}>{book.label}</div>
+                        <div className="card card-body book" key={book.id}>
+                            <button
+                                id={book.id}
+                                style={{ outline: 'none' }}
+                                className='btn stretched-link'
+                                onClick={(e) => onClick(e)}>{book.label}
+                            </button>
+                        </div>
                     )
                 })}
             </div>
         </div>
-    )
-}
 
-const styles = {
-    bookBar: {
-        display: 'block',
-        color: 'black',
-        backgroundColor: '#01B8BE',
-        borderBottom: '1px dotted gray'
-    }
+    )
 }
