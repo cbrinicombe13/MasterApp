@@ -17,7 +17,7 @@ export default function LoginScreen(props) {
 
     const login = async (details) => {
         setLoading(true);
-        const resp = await axios.post('http://192.168.64.2/master-api/user/login.php', {
+        const resp = await axios.post('http://192.168.64.2/master-api/user/login2.php', {
             username: details[0],
             pwd: details[1]
         }).then(resp => {
@@ -27,11 +27,12 @@ export default function LoginScreen(props) {
         if (resp.error) {
             setError(resp.error);
             return;
-        } else if (resp.valid) {
+        } else if (resp.username) {
             dispatch(setUser({
-                username: resp.user.username,
-                email: resp.user.email,
-                labels: resp.user.labels
+                username: resp.username,
+                email: resp.email,
+                labels: resp.labels,
+                books: JSON.parse(resp.books)
             }));
             props.setLoggedIn(true);
         }

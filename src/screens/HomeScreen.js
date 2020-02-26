@@ -1,41 +1,27 @@
 import React, { useState } from 'react';
-import axios from 'axios';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import Header from '../components/Header';
 import Book from '../components/Book';
 import SideBar from '../components/SideBar';
 import CustomModal from '../components/CustomModal';
-import { addBook } from '../store/actions/books';
 
 export default function HomeScreen() {
     const [show, setShow] = useState(false);
     const [newLabel, setNewLabel] = useState('');
-    const [error, setError] = useState('');
+    const [error, setError] = useState(''); // For new books later.
 
     const user = useSelector(state => state.user.user);
-    const [labels, setLabels] = useState(user.labels);
-
     const theme = useSelector(state => state.theme.theme);
-    const dispatch = useDispatch();
 
-    const onNewBook = async () => {
-        const resp = await axios.post('http://192.168.64.2/master-api/book/createBook.php', {
-            label: newLabel,
-            allowAccess: user.username
-        }).then(resp => resp.data);
-        if (resp.error) {
-            setError(resp.error);
-            return;
-        } else if (resp.created) {
-            dispatch(addBook(newLabel));
-            setLabels([...labels, { id: resp.id, label: resp.label }]);
-        } else {
-            setError('Could not create book.');
-            return;
-        }
+    const onNewBook = () => {
+        console.log('Adding new book..');
         setShow(false);
-        return;
+    }
+
+    const onClose = () => {
+        setShow(false);
+        setNewLabel('');
     }
 
     return (
@@ -51,7 +37,7 @@ export default function HomeScreen() {
             </Header>
             <div className='row' style={styles.actionArea}>
                 <div className='col-3' style={styles.sideBarArea}>
-                    <SideBar labels={labels} />
+                    <SideBar labels={user.labels} />
                 </div>
                 <div className='col-9' style={styles.bookArea}>
                     <Book />
@@ -60,8 +46,9 @@ export default function HomeScreen() {
             <CustomModal
                 show={show}
                 error={error}
-                onNewBook={onNewBook}
-                onClose={() => setShow(false)}>
+                title='New Book'
+                submit={onNewBook}
+                onClose={onClose}>
                 <form>
                     <input
                         type="text"
@@ -85,5 +72,10 @@ const styles = {
     },
     sideBarArea: {
         borderRight: '1px solid black',
+        backgroundColor: 'rgba(255, 255, 255, 0.5)'
+    },
+    bookArea: {
+        backgroundColor: 'rgba(255, 255, 255, 0.9)',
+        padding: '10px'
     }
 }

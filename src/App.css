@@ -1,8 +1,8 @@
-.card-img-overlay, .col-3, .col-9, .book {
+.card-img-overlay, .col-3, .col-9, .book, .col-md-3 {
     padding: 0;
 }
 
-div.container, h1 {
+div.container, h1, h5 {
     margin: 0;
 }
 

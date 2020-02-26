@@ -1,32 +1,35 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
+
+import { setActiveBook } from '../store/actions/user';
 
 export default function SideBar(props) {
-
-    const onClick = (e) => {
+    const dispatch = useDispatch();
+    const onClick = (e, label) => {
         const bookList = e.target.parentNode.parentNode.children;
-        for(let i = 0; i < bookList.length; i++) {
+        for (let i = 0; i < bookList.length; i++) {
             let book = bookList[i].firstChild;
-            if(book.classList.contains('active')) {
+            if (book.classList.contains('active')) {
                 book.classList.remove('active');
             }
         }
         e.target.classList.add('active');
+        dispatch(setActiveBook(label));
     }
 
     return (
         <div>
             <div>
-                <h5 className='card-title'>Your Books</h5>
+                <h5>Your Books</h5>
             </div>
             <div className='card'>
-                {props.labels.map(book => {
+                {props.labels.map(label => {
                     return (
-                        <div className="card card-body book" key={book.id}>
+                        <div className="card card-body book" key={props.labels.indexOf(label)}>
                             <button
-                                id={book.id}
                                 style={{ outline: 'none' }}
                                 className='btn stretched-link'
-                                onClick={(e) => onClick(e)}>{book.label}
+                                onClick={(e) => onClick(e, label)}>{label}
                             </button>
                         </div>
                     )
