@@ -13,3 +13,11 @@ div.container, h1, h5 {
 .active {
     background-color: #F5F5F5;
 }
+
+button {
+    outline: none !important;
+}
+
+.btn-full {
+    width: '100%'
+}
