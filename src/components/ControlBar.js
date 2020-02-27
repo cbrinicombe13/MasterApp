@@ -2,8 +2,10 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import { v4 as uuidv4 } from 'uuid'
 import { useSelector, useDispatch } from 'react-redux'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { shake } from '../assets/utilities/dynamics'
 
-import { addContact } from '../store/actions/user'
+import { addContact, deleteBook } from '../store/actions/user'
 import CustomModal from '../components/CustomModal'
 import NewContactForm from '../components/NewContactForm'
 
@@ -64,6 +66,20 @@ export default function ControlBar(props) {
         }
     }
 
+    const deleteActiveBook = async () => {
+        const resp = await axios.delete('http://192.168.64.2/master-api/contact/deleteBook.php', {
+            data: {
+                username: user.username,
+                belongsTo: user.activeBook
+            }
+        }).then(resp => resp.data);
+        if(resp.deleted) {
+            dispatch(deleteBook());
+        } else {
+            shake('delete-icon');
+        }
+    }
+
     return (
         <div className='row' style={styles.controlBar}>
             <div className='col'>
@@ -81,12 +97,25 @@ export default function ControlBar(props) {
                 </div>
             </div>
             <div className='col'>
-                <div style={styles.btnContainer}>
-                    <button
-                        style={{ backgroundColor: theme.primary }}
-                        className='btn'
-                        onClick={() => setShow(true)}>New Contact
-                    </button>
+                <div className='row' style={{ float: 'right' }}>
+                    <div style={styles.btnContainer}>
+                        <button
+                            className='btn'
+                            onClick={deleteActiveBook}>
+                            <FontAwesomeIcon
+                                icon='trash-alt'
+                                size='lg'
+                                color='red'
+                                id='delete-icon' />
+                        </button>
+                    </div>
+                    <div style={styles.btnContainer}>
+                        <button
+                            style={{ backgroundColor: theme.primary, ...styles.btn }}
+                            className='btn'
+                            onClick={() => setShow(true)}>New Contact
+                        </button>
+                    </div>
                 </div>
             </div>
             <CustomModal
@@ -109,7 +138,9 @@ const styles = {
         float: 'left'
     },
     btnContainer: {
-        float: 'right',
-        paddingRight: '10px'
+        marginRight: '15px'
+    },
+    btn: {
+        marginRight: '10px'
     }
 };

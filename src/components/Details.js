@@ -2,7 +2,6 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEnvelopeOpenText, faMobileAlt, faBriefcase } from '@fortawesome/free-solid-svg-icons'
 
 export default function Details(props) {
     const theme = useSelector(state => state.theme.theme);
@@ -10,7 +9,7 @@ export default function Details(props) {
         <div style={{ marginBottom: '5%' }}>
             <div style={styles.info}>
                 <FontAwesomeIcon
-                    icon={faEnvelopeOpenText}
+                    icon='envelope-open-text'
                     size='lg'
                     color={theme.primary}
                     style={styles.icon} />
@@ -18,7 +17,7 @@ export default function Details(props) {
             </div>
             <div style={styles.info}>
                 <FontAwesomeIcon
-                    icon={faMobileAlt}
+                    icon='mobile-alt'
                     size='lg'
                     color={theme.primary}
                     style={styles.icon} />
@@ -26,7 +25,7 @@ export default function Details(props) {
             </div>
             <div style={styles.info}>
                 <FontAwesomeIcon
-                    icon={faBriefcase}
+                    icon='briefcase'
                     size='lg'
                     color={theme.primary}
                     style={styles.icon} />

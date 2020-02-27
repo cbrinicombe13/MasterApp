@@ -22,7 +22,6 @@ const styles = {
     header: {
         backgroundColor: 'rgba(255, 255, 255, 0.7)',
         width: '100%',
-        position: 'fixed',
         padding: '10px',
         height: '75px'
     },

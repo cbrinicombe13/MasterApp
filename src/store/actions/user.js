@@ -1,6 +1,8 @@
 export const SET_USER = 'SET_USER';
 export const SET_ACTIVE_BOOK = 'SET_ACTIVE_BOOK';
 export const ADD_CONTACT = 'ADD_CONTACT';
+export const ADD_BOOK = 'ADD_BOOK';
+export const DELETE_BOOK = 'DELETE_BOOK';
 
 export const setUser = (details) => {
     return {
@@ -16,9 +18,22 @@ export const setActiveBook = (book) => {
     };
 }
 
-export const addContact = (newContact) => {
+export const addContact = (details) => {
     return {
         type: ADD_CONTACT,
-        newContact: newContact
+        newContact: details
+    }
+}
+
+export const addBook = (details) => {
+    return {
+        type: ADD_BOOK,
+        details: details
+    }
+}
+
+export const deleteBook = () => {
+    return {
+        type: DELETE_BOOK
     }
 }

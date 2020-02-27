@@ -54,7 +54,9 @@ export default function LoginScreen(props) {
         } else if (resp.created) {
             dispatch(setUser({
                 username: input.username,
-                email: input.email
+                email: input.email,
+                labels: [],
+                books: []
             }));
             props.setLoggedIn(true);
         }
