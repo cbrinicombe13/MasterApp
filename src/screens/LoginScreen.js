@@ -17,7 +17,7 @@ export default function LoginScreen(props) {
 
     const login = async (details) => {
         setLoading(true);
-        const resp = await axios.post('http://192.168.64.2/master-api/user/login2.php', {
+        const resp = await axios.post('http://192.168.64.2/master-api/user/login.php', {
             username: details[0],
             pwd: details[1]
         }).then(resp => {

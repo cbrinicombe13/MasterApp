@@ -9,7 +9,7 @@ export default function NewContactForm(props) {
     return (
         <form>
             <div className='row'>
-                <div className='col align-self-center'>
+                <div className='col-md'>
                     <input
                         type='text'
                         id='firstName'
@@ -18,7 +18,7 @@ export default function NewContactForm(props) {
                         placeholder='First Name'
                         onChange={(e) => onChange(e)} />
                 </div>
-                <div className='col align-self-center'>
+                <div className='col-md'>
                     <input
                         type='text'
                         id='lastName'
@@ -36,7 +36,7 @@ export default function NewContactForm(props) {
                 placeholder='Occupation'
                 onChange={(e) => onChange(e)} />
             <div className='row'>
-                <div className='col align-self-center'>
+                <div className='col-md'>
                     <input
                         type='text'
                         id='phone'
@@ -45,7 +45,7 @@ export default function NewContactForm(props) {
                         placeholder='Contact Number'
                         onChange={(e) => onChange(e)} />
                 </div>
-                <div className='col align-self-center'>
+                <div className='col-md'>
                     <input
                         type='text'
                         id='email'

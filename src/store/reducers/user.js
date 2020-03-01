@@ -3,7 +3,8 @@ import {
     SET_ACTIVE_BOOK,
     ADD_CONTACT,
     ADD_BOOK,
-    DELETE_BOOK
+    DELETE_BOOK,
+    LOGOUT
 } from '../actions/user';
 
 const initialState = {
@@ -118,6 +119,9 @@ const userReducer = (state = initialState, action) => {
                     }
                 }
             }
+
+        case LOGOUT:
+            return initialState;
 
         default:
             return state;

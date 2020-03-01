@@ -10,7 +10,6 @@ import CustomModal from '../components/CustomModal'
 import NewContactForm from '../components/NewContactForm'
 
 export default function ControlBar(props) {
-    const [search, setSearch] = useState('');
     const [error, setError] = useState('');
     const [show, setShow] = useState(false);
     const [newContact, setNewContact] = useState({
@@ -36,10 +35,6 @@ export default function ControlBar(props) {
 
     const theme = useSelector(state => state.theme.theme);
     const user = useSelector(state => state.user.user);
-
-    const onChange = (e) => {
-        setSearch(e.target.value);
-    }
 
     const onClose = () => {
         setShow(false);
@@ -75,6 +70,7 @@ export default function ControlBar(props) {
         }).then(resp => resp.data);
         if(resp.deleted) {
             dispatch(deleteBook());
+            return;
         } else {
             shake('delete-icon');
         }
@@ -90,9 +86,9 @@ export default function ControlBar(props) {
                     <div style={{ paddingLeft: '10px' }}>
                         <input
                             className='form-control'
-                            type='text' value={search}
+                            type='text' value={props.search}
                             placeholder='Search..'
-                            onChange={(e) => onChange(e)} />
+                            onChange={(e) => props.setSearch(e.target.value)} />
                     </div>
                 </div>
             </div>
@@ -111,9 +107,10 @@ export default function ControlBar(props) {
                     </div>
                     <div style={styles.btnContainer}>
                         <button
-                            style={{ backgroundColor: theme.primary, ...styles.btn }}
+                            style={{ ...styles.btn, marginRight: '10px'}}
                             className='btn'
-                            onClick={() => setShow(true)}>New Contact
+                            onClick={() => setShow(true)}>
+                                <FontAwesomeIcon icon='user-plus' size='lg' color={theme.primary} />
                         </button>
                     </div>
                 </div>
@@ -139,8 +136,5 @@ const styles = {
     },
     btnContainer: {
         marginRight: '15px'
-    },
-    btn: {
-        marginRight: '10px'
     }
 };

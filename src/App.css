@@ -1,9 +1,9 @@
-.card-img-overlay, .col-3, .col-9, .book, .col-md-3 {
+.card-img-overlay, .col-3, .col-9, .book, .col-md-3, .col-md-10, .col-md-2, .col-md {
     padding: 0;
 }
 
-div.container, h1, h5 {
-    margin: 0;
+div.container, h1, h5, header, .row {
+    margin: 0 !important;
 }
 
 .book:hover {

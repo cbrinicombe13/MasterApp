@@ -3,6 +3,7 @@ export const SET_ACTIVE_BOOK = 'SET_ACTIVE_BOOK';
 export const ADD_CONTACT = 'ADD_CONTACT';
 export const ADD_BOOK = 'ADD_BOOK';
 export const DELETE_BOOK = 'DELETE_BOOK';
+export const LOGOUT = 'LOGOUT';
 
 export const setUser = (details) => {
     return {
@@ -35,5 +36,11 @@ export const addBook = (details) => {
 export const deleteBook = () => {
     return {
         type: DELETE_BOOK
+    }
+}
+
+export const signOut = () => {
+    return {
+        type: LOGOUT
     }
 }
