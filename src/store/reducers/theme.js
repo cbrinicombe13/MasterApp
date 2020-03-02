@@ -1,4 +1,4 @@
-import themes from '../../assets/themes';
+import themes from '../../assets/utilities/themes';
 
 const initialState = {
     theme: themes.basic

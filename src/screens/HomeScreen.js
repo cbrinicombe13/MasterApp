@@ -1,6 +1,4 @@
 import React from 'react';
-
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useSelector, useDispatch } from 'react-redux';
 import { signOut } from '../store/actions/user';
@@ -8,10 +6,12 @@ import { signOut } from '../store/actions/user';
 import Header from '../components/Header';
 import Book from '../components/Book';
 import SideBar from '../components/SideBar';
+import Profile from '../components/Profile';
 
 export default function HomeScreen(props) {
     const dispatch = useDispatch();
     const user = useSelector(state => state.user.user);
+    const theme = useSelector(state => state.theme.theme);
 
     const logout = async () => {
         props.setLoggedIn(false);
@@ -22,14 +22,18 @@ export default function HomeScreen(props) {
         <div className='card-img-overlay'>
             <Header title={'Hi, ' + user.username}>
                 <div className='col-md'>
-                    <div>
-                        <button
-                            className='btn'
-                            style={{ float: 'right' }}
-                            onClick={logout}>
-                            <FontAwesomeIcon icon='sign-out-alt' color='gray' size='lg' />
-                        </button>
-                    </div>
+                    <button
+                        className='btn'
+                        style={{ float: 'right' }}
+                        onClick={logout}>
+                        <FontAwesomeIcon icon='sign-out-alt' color='gray' size='lg' />
+                    </button>
+                    <button
+                        className='btn'
+                        style={{ float: 'right' }}
+                        to='/profile'>
+                        <FontAwesomeIcon icon='user-circle' color={theme.primary} size='lg' />
+                    </button>
                 </div>
             </Header>
             <div className='row' style={styles.actionArea}>

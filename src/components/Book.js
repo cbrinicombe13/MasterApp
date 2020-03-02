@@ -16,6 +16,7 @@ export default function Book(props) {
             contact.occupation.includes(search)
             );
     });
+
     return (
         <React.Fragment>
             <React.Fragment>
